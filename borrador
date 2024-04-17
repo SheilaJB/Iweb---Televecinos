@@ -1,0 +1,54 @@
+<!-- Popup de Confirmación para Eliminar Eventos -->
+        <div id="deleteConfirmationPopup" class="popup" >
+            <div class="popup-content">
+                <span class="close-btn" id="closeDeletePopupBtn">&times;</span>
+                <img src="img/warning.png" alt="check" width="48" height="48" style="margin-top: -10px;">
+                <h2 style="margin-top: 20px;">Confirmar Eliminación</h2>
+                <p>¿Estás seguro de que deseas eliminar este evento?</p>
+                <button id="confirmDeleteBtn" class="btn btn-danger">Eliminar</button>
+                <button onclick="closeDeletePopup()" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+        
+
+        
+
+        <!-- JavaScript para Popup -->
+        <script>
+            const closeDeletePopupBtn = document.getElementById('closeDeletePopupBtn');
+            const deleteConfirmationPopup = document.getElementById('deleteConfirmationPopup');
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            const mainContent = document.querySelector('.content'); // Selecciona el contenido principal que quieres deshabilitar
+        
+            // Función para deshabilitar interacciones
+            function disableInteractions() {
+                mainContent.style.pointerEvents = 'none';
+                mainContent.style.opacity = '0.4'; // Opcional: reduce la opacidad para un efecto visual de desactivado
+            }
+        
+            // Función para habilitar interacciones
+            function enableInteractions() {
+                mainContent.style.pointerEvents = 'all';
+                mainContent.style.opacity = '1'; // Restaura la opacidad
+            }
+        
+            // Función para cerrar el popup
+            function closeDeletePopup() {
+                deleteConfirmationPopup.style.display = 'none';
+                enableInteractions();
+            }
+        
+            // Eventos para manejar el popup
+            closeDeletePopupBtn.addEventListener('click', closeDeletePopup);
+            confirmDeleteBtn.addEventListener('click', function() {
+                console.log('Eliminar el evento'); // Implementar eliminación real aquí
+                closeDeletePopup();
+            });
+        
+            // Función para abrir el popup de confirmación
+            function confirmDelete() {
+                deleteConfirmationPopup.style.display = 'block';
+                disableInteractions();
+            }
+        </script>
+        
