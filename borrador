@@ -1,31 +1,47 @@
-<style>
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-        .popup-content {
-            background-color: white;
-            width: 50%;
-            max-width: 400px;
-            margin: 100px auto; 
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            position: relative;
-        }
-        .close-btn {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            color: rgb(0, 0, 0);
-        }
-    </style>
+<!-- Popup de Confirmación para crear Eventos -->
+        <div id="createConfirmationPopup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn" id="closeCreatePopupBtn">&times;</span>
+                <img src="img/check.png" alt="check" width="48" height="48" style="margin-top: -10px;">
+                <h2>Creación Exitosa</h2>
+                <p>El evento ha sido creado con éxito.</p>
+                <button onclick="closeCreatePopup()" class="btn btn-secondary">Regresar</button>
+            </div>
+        </div>
+
+        <script>
+            const closeCreatePopupBtn = document.getElementById('closeCreatePopupBtn');
+            const createConfirmationPopup = document.getElementById('createConfirmationPopup');
+            const mainContent = document.querySelector('.content'); // Selecciona el contenido principal que quieres deshabilitar
+        
+            // Función para deshabilitar interacciones
+            function disableInteractions() {
+                mainContent.style.pointerEvents = 'none';
+                mainContent.style.opacity = '0.4'; // Opcional: reduce la opacidad para un efecto visual de desactivado
+            }
+        
+            // Función para habilitar interacciones
+            function enableInteractions() {
+                mainContent.style.pointerEvents = 'all';
+                mainContent.style.opacity = '1'; // Restaura la opacidad
+            }
+        
+            
+            // Función para cerrar el popup y potencialmente redirigir al usuario
+            function closeCreatePopup() {
+                createConfirmationPopup.style.display = 'none';
+                enableInteractions();
+                //redirigir al usuario o recargar la página
+                window.location.href = 'ListaEvent-Coordinador.html'; // Redirige al usuario a la lista de eventos
+            }
+
+            // Evento para cerrar el popup cuando se presiona el botón de cerrar
+            closeCreatePopupBtn.addEventListener('click', closeCreatePopup);
+
+            // Función para mostrar el mensaje de éxito al crear un evento
+            function mostrarMensajeExito() {
+                createConfirmationPopup.style.display = 'block';
+                disableInteractions();
+            }
+
+        </script>
